@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+
+struct stack
+{
+  int top;
+  int size;
+  char *arr;
+};
+
+struct stack *createstack(int capacity)
+{
+  struct stack *s1 = (struct stack *)malloc(sizeof(struct stack));
+  s1->top = -1;
+  s1->size = capacity;
+  s1->arr = (char *)malloc(s1->size * (sizeof(char)));
+  return s1;
+}
+
+bool IsEmpty(struct stack *stack)
+{
+  if (stack->top == -1)
+  {
+    return true;
+  }
+  return false;
+}
+
+bool IsFull(struct stack *stack)
+{
+  if (stack->top == stack->size - 1)
+  {
+    return true;
+  }
+  return false;
+}
+
+void push(struct stack *stack, char value)
+{
+  if (IsFull(stack) == true)
+  {
+    return;
+  }
+  stack->top++;
+  stack->arr[stack->top] = value;
+  return;
+}
+
+char pop(struct stack *stack)
+{
+  if (IsEmpty(stack) == false)
+  {
+    char rem = stack->arr[stack->top];
+    stack->top--;
+    return rem;
+  }
+  return '\0';
+}
+
+bool isValid(char * s){
+    struct stack *stack = createstack(strlen(s));
+    for(int i=0; i<strlen(s); i++){
+        if(s[i] == '(' || s[i] == '[' || s[i] == '{'){
+            push(stack, s[i]);
+        } else if(s[i] == ')' && pop(stack) != '('){
+            return false;
+        } else if(s[i] == ']' && pop(stack) != '['){
+            return false;
+        } else if(s[i] == '}' && pop(stack) != '{'){
+            return false;
+        }
+    }
+    return IsEmpty(stack);
+}
