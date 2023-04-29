@@ -1,0 +1,62 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+ struct ListNode* head2=NULL;
+#include <string.h>
+ struct ListNode *reverse(struct ListNode *head2){
+    struct ListNode *prev=NULL;
+    struct ListNode *curr=head2;
+    struct ListNode *next;
+    while(curr!=NULL){
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+    }
+    head2=prev;
+    return head2;
+}
+void insert(struct ListNode *head2,int data){
+    struct ListNode *temp=head2;
+    if(temp==NULL){
+        temp=malloc(sizeof(struct ListNode));
+        temp->val=data;
+        temp->next=NULL;
+        head2=temp;
+    }
+    else{
+        struct ListNode* newnode=malloc(sizeof(struct ListNode));
+        while(temp->next !=NULL && temp!=NULL){
+            temp=temp->next;
+        }
+        temp->next=newnode;
+        newnode->val=data;
+        newnode->next=NULL;
+    }
+}
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* head = NULL;
+    struct ListNode** tail = &head;
+    int carry = 0;
+    while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+        *tail = malloc(sizeof(struct ListNode));
+        (*tail)->val = sum % 10;
+        (*tail)->next = NULL;
+        tail = &((*tail)->next);
+        carry = sum / 10;
+    }
+    return head;
+}
