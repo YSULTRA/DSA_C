@@ -1,0 +1,57 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+struct TreeNode* prev = NULL;
+
+struct node{
+    int data;
+    struct node *next;
+}*head=NULL;
+
+void insert(struct node *head,int data){
+    struct node *temp=head;
+    if(temp==NULL){
+        temp=malloc(sizeof(struct node));
+        temp->data=data;
+        temp->next=NULL;
+        head=temp;
+    }
+    else{
+        struct node* newnode=malloc(sizeof(struct node));
+        while(temp->next !=NULL && temp!=NULL){
+            temp=temp->next;
+        }
+        temp->next=newnode;
+        newnode->data=data;
+        newnode->next=NULL;
+    }
+}
+void flatten(struct TreeNode* root){
+    if (root == NULL) return;
+    if (root->left != NULL) {
+        flatten(root->left);
+        struct TreeNode* rightSubtree = root->right;
+        root->right = root->left;
+        root->left = NULL;
+        struct TreeNode* rightmostNode = root->right;
+        while (rightmostNode->right != NULL) {
+            rightmostNode = rightmostNode->right;
+        }
+        rightmostNode->right = rightSubtree;
+    }
+    flatten(root->right);
+}
+void print(struct node*head){
+    struct node *t=head;
+    printf("[");
+    while(t!=NULL){
+    printf("%d",t->data);
+    t=t->next;
+    }
+    printf("]");
+}
