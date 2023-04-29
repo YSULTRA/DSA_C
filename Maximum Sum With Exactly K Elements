@@ -1,0 +1,14 @@
+int maximizeSum(int* nums, int numsSize, int k){
+    int max=0;
+    for(int i=0;i<numsSize;i++){
+        if(max<nums[i]){
+            max=nums[i];
+        }
+    }
+    int sum=max;
+    for(int j=0;j<k-1;j++){
+        max++;
+        sum+=max;
+    }
+    return sum;
+}
