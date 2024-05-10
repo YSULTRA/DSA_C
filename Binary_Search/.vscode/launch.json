@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/YASH SINGH/OneDrive/Desktop/DSA_C",
-      "program": "c:/Users/YASH SINGH/OneDrive/Desktop/DSA_C/build/Debug/outDebug",
+      "cwd": "c:/Users/YASH SINGH/OneDrive/Desktop/DSA_C/Binary_Search",
+      "program": "c:/Users/YASH SINGH/OneDrive/Desktop/DSA_C/Binary_Search/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
